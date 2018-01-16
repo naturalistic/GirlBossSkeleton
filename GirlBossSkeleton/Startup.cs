@@ -26,11 +26,11 @@ namespace GirlBossSkeleton
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationIdentityDbContext>(options =>
+                options.UseSqlServer(Configuration["Data:GirlBossSkeletonIdentity:ConnectionString"]));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<ApplicationIdentityDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc()
@@ -69,6 +69,10 @@ namespace GirlBossSkeleton
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
             });
+            ApplicationIdentityDbContext.CreateAdminAccount(app.ApplicationServices,
+             Configuration).Wait();
+            ApplicationIdentityDbContext.CreateMentorsRole(app.ApplicationServices, 
+             Configuration).Wait();
         }
     }
 }

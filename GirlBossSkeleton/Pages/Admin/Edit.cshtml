@@ -1,0 +1,52 @@
+﻿@page
+@model GirlBossSkeleton.Pages.Admin.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>AppUserViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="AppUserViewModel.ID" />
+            <div class="form-group">
+                <label asp-for="AppUserViewModel.Name" class="control-label"></label>
+                <input asp-for="AppUserViewModel.Name" class="form-control" />
+                <span asp-validation-for="AppUserViewModel.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AppUserViewModel.Email" class="control-label"></label>
+                <input asp-for="AppUserViewModel.Email" class="form-control" />
+                <span asp-validation-for="AppUserViewModel.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AppUserViewModel.Password" class="control-label"></label>
+                <input asp-for="AppUserViewModel.Password" class="form-control" />
+                <span asp-validation-for="AppUserViewModel.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="AppUserViewModel.IsMentor" /> @Html.DisplayNameFor(model => model.AppUserViewModel.IsMentor)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

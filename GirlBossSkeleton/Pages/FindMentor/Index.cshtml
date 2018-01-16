@@ -1,0 +1,38 @@
+﻿@page
+@model GirlBossSkeleton.Pages.FindMentor.IndexModel
+
+@{
+    ViewData["Title"] = "Mentors";
+}
+
+<div class="bg-primary panel-body"><h4>Find a Mentor</h4></div>
+<div asp-validation-summary="All" class="text-danger"></div>
+<form asp-action="Edit" method="post">
+    <h6 class="bg-info panel-body">Mentors</h6>
+    <table class="table table-bordered table-condensed">
+        @if (Model.Mentors.Count() == 0)
+        {
+            <tr><td colspan="2">All Users Are Members</td></tr>
+        }
+        else
+        {
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                </tr>
+            </thead>
+            @foreach (var mentor in Model.Mentors)
+            {
+                <tr>
+                    <td>@mentor.UserName</td>
+                    <td>@mentor.Email</td>
+                </tr>
+            }
+        }
+    </table>
+</form> 

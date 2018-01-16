@@ -49,6 +49,9 @@ namespace GirlBossSkeleton.Pages.Account
             [Display(Name = "Password")]
             public string Password { get; set; }
 
+            [Display(Name = "Are you a mentor?")]
+            public bool IsMentor { get; set; }
+
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
@@ -65,7 +68,7 @@ namespace GirlBossSkeleton.Pages.Account
             ReturnUrl = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
+                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, IsMentor = Input.IsMentor };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
